@@ -1,0 +1,78 @@
+{
+  "name": "canvas-node",
+  "private": true,
+  "version": "0.0.1",
+  "main": "dist-electron/electron/main.js",
+  "homepage": "./",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "vitebook": "vitebook dev",
+    "vitebook:build": "vitebook build",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
+    "electron-build": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.0",
+    "@mui/material": "^5.15.0",
+    "@mui/system": "^5.15.0",
+    "@tanstack/react-query": "^5.45.0",
+    "better-sqlite3": "^11.10.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.30.3",
+    "reactflow": "^11.10.1",
+    "zod": "^4.3.6",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "@vitebook/client": "^0.100.5",
+    "@vitebook/core": "^0.200.3",
+    "@vitejs/plugin-react": "^3.1.0",
+    "concurrently": "^9.2.1",
+    "electron": "^27.2.0",
+    "electron-builder": "^26.8.1",
+    "jsdom": "^29.0.1",
+    "sass": "^1.69.5",
+    "typescript": "^5.3.3",
+    "vite": "^4.4.12",
+    "vite-plugin-dts": "^4.5.4",
+    "vitebook": "^0.202.0",
+    "vitest": "^4.1.0",
+    "wait-on": "^8.0.5"
+  },
+  "build": {
+    "appId": "com.canvas-node.app",
+    "productName": "CanvasNode",
+    "directories": {
+      "buildResources": "public"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
