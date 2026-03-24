@@ -4,7 +4,7 @@ CanvasNode es una aplicación de escritorio desarrollada con Electron, React, Ty
 
 ## Prerrequisitos
 
-- [Node.js](https://nodejs.org/) (versión 2.21.1 o superior)
+- [Node.js](https://nodejs.org/) (versión 22.21.1 o superior)
 - npm
 
 ## Instalación
