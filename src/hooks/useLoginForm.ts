@@ -30,9 +30,9 @@ export function useLoginForm({ onLogin }: UseLoginFormProps) {
     if (!result.success) {
       const newErrors: FormErrors = {};
       result.error.issues.forEach((issue) => {
-        if (issue.path[0] === 'email') {
+        if (issue.path[0] === 'email' && !newErrors.email) {
           newErrors.email = issue.message;
-        } else if (issue.path[0] === 'password') {
+        } else if (issue.path[0] === 'password' && !newErrors.password) {
           newErrors.password = issue.message;
         }
       });
