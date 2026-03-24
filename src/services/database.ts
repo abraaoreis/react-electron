@@ -1,8 +1,8 @@
 import Database from 'better-sqlite3';
-import path from 'path';
+import * as path from 'path';
 import { app } from 'electron';
 
-// Tipo para dados do nó
+// Tipo para datos del nodo
 export interface NodeData {
   id: string;
   label: string;
@@ -10,7 +10,7 @@ export interface NodeData {
   title: string;
 }
 
-// Tipo para nó completo
+// Tipo para nodo completo
 export interface Node {
   id: string;
   data: NodeData;
@@ -20,7 +20,7 @@ export interface Node {
   };
 }
 
-// Tipo para edge
+// Tipo para arista (edge)
 export interface Edge {
   id: string;
   type?: string;
@@ -37,10 +37,17 @@ export interface DiagramData {
 let db: Database.Database;
 
 function initializeDatabase() {
-  const dbPath = path.join(app.getPath('userData'), 'diagram.db');
-  db = new Database(dbPath);
+  try {
+    const dbPath = path.join(app.getPath('userData'), 'diagram.db');
+    console.log('[Base de Datos] Ruta:', dbPath);
+    db = new Database(dbPath);
+    console.log('[Base de Datos] Instancia creada con éxito');
+  } catch (error) {
+    console.error('[Base de Datos] Error al inicializar:', error);
+    throw error;
+  }
 
-  // Criar tabela de nós
+  // Crear tabla de nodos
   db.exec(`
     CREATE TABLE IF NOT EXISTS nodes (
       id TEXT PRIMARY KEY,
@@ -54,7 +61,7 @@ function initializeDatabase() {
     )
   `);
 
-  // Criar tabela de edges
+  // Crear tabla de aristas (edges)
   db.exec(`
     CREATE TABLE IF NOT EXISTS edges (
       id TEXT PRIMARY KEY,
@@ -75,7 +82,7 @@ export function getDatabase(): Database.Database {
   return db;
 }
 
-// Funções para CRUD de Nós
+// Funciones para CRUD de Nodos
 export function addNode(node: Node): void {
   const db = getDatabase();
   const stmt = db.prepare(`
@@ -162,7 +169,7 @@ export function deleteNode(id: string): void {
   stmt.run(id);
 }
 
-// Funções para CRUD de Edges
+// Funciones para CRUD de Aristas (Edges)
 export function addEdge(edge: Edge): void {
   const db = getDatabase();
   const stmt = db.prepare(`
@@ -209,7 +216,7 @@ export function deleteEdge(id: string): void {
   stmt.run(id);
 }
 
-// Função para obter o diagrama completo
+// Función para obtener el diagrama completo
 export function getDiagramData(): DiagramData {
   return {
     nodes: getAllNodes(),
@@ -217,14 +224,14 @@ export function getDiagramData(): DiagramData {
   };
 }
 
-// Função para limpar o banco (útil para testes/reset)
+// Función para limpiar la base de datos (útil para pruebas/reinicio)
 export function clearDatabase(): void {
   const db = getDatabase();
   db.exec('DELETE FROM edges');
   db.exec('DELETE FROM nodes');
 }
 
-// Função para fechar a conexão com o banco
+// Función para cerrar la conexión con la base de datos
 export function closeDatabase(): void {
   if (db) {
     db.close();

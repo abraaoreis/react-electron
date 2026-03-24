@@ -1,83 +1,100 @@
-# Meu Projeto
+# CanvasNode
 
-Este é um projeto Electron com React, TypeScript e Vite.
+CanvasNode es una aplicación de escritorio desarrollada con Electron, React, TypeScript y Vite.
 
-## Pré-requisitos
+## Prerrequisitos
 
-- Node.js (versão 18 ou superior)
+- [Node.js](https://nodejs.org/) (versión 18 o superior)
 - npm
 
-## Instalação
+## Instalación
 
-1. Clone o repositório:
+1. Clona el repositorio e ingresa al directorio:
+
    ```bash
-   git clone <url-do-repositorio>
-   cd meu-projeto
+   git clone <url-del-repositorio>
+   cd <nombre-del-directorio>
    ```
 
-2. Instale as dependências:
+2. Instala las dependencias:
+
    ```bash
    npm install
    ```
 
-## Executando o Projeto
+3. Reconstruye las dependencias nativas (necesario para `better-sqlite3` en Electron):
 
-### Desenvolvimento
+   ```bash
+   npm run rebuild
+   ```
 
-Para executar o projeto em modo de desenvolvimento (com hot reload):
+## Ejecución del Proyecto
+
+### Desarrollo (Frontend + Electron)
+
+Para ejecutar el proyecto en modo de desarrollo (con recarga en caliente o *hot reload*):
+
 ```bash
 npm run electron-dev
 ```
 
-Isso iniciará o servidor Vite e o Electron simultaneamente.
+Esto iniciará el servidor de Vite y la ventana de Electron de forma simultánea.
 
-### Apenas o Frontend
+### Solo el Frontend
 
-Para executar apenas o frontend React:
+Para ejecutar únicamente la interfaz gráfica en tu navegador web:
+
 ```bash
 npm run dev
 ```
 
-### Construção
+### Construcción y Empaquetado
 
-Para construir o projeto para produção:
+Para construir únicamente el código fuente de la interfaz web (frontend):
+
 ```bash
 npm run build
 ```
 
-### Executar Electron com Build
+Para empaquetar la aplicación completa y generar los instaladores para distribución (ej. `.exe` para Windows):
 
-Para executar o Electron com o build de produção:
+```bash
+npm run electron-build
+```
+
+### Ejecutar Electron con el Build de Producción
+
+Para iniciar la aplicación de Electron utilizando la última compilación de producción generada:
+
 ```bash
 npm run electron
 ```
 
-### Executar Testes
+### Pruebas
 
-Para executar os testes unitários:
+Para ejecutar las pruebas unitarias:
+
 ```bash
-npm test
+npm run test
 ```
 
-Para executar os testes uma vez (modo CI):
+Para ejecutar las pruebas unitarias una sola vez (modo Integración Continua o CI):
+
 ```bash
-npm test -- --run
+npm run test -- --run
 ```
 
-## Estrutura do Projeto
+## Estructura del Proyecto
 
-- `src/`: Código fonte React/TypeScript
-- `electron/`: Código do processo principal do Electron
-- `public/`: Assets estáticos
-- `dist/`: Build de produção
+- `src/`: Código fuente de React y TypeScript (Interfaz de usuario).
+- `electron/`: Código del proceso principal de Electron (Backend local).
+- `public/`: Archivos y recursos estáticos.
+- `dist/`: Archivos de la compilación de producción web (Frontend).
+- `dist-electron/`: Archivos de la compilación de producción de Electron.
 
-## Tecnologias Utilizadas
+## Tecnologías Utilizadas
 
-- React
-- TypeScript
-- Electron
-- Vite
-- Material-UI
-- Zustand
-- React Flow
-- Better SQLite3
+- **Frontend:** React, TypeScript, Vite, Material-UI (@mui/material), Zustand (Estado Global), React Flow.
+- **Escritorio:** Electron y Electron Builder.
+- **Base de Datos Local:** Better SQLite3.
+- **Pruebas:** Vitest, Testing Library.
